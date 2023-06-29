@@ -104,14 +104,17 @@ const specCharArr = [
   "~",
   ";",
 ];
-// Write password to the #password input
 
-// Function questions is container for all question prompts or confirms
+let passobj = [""];
+let password = [];
+
 function questions() {
+  var allChars = lowercaseArr + uppercaseArr + specCharArr;
+
   let options = [];
 
   let charCount = prompt(
-    "How many charachters would you like your password to be?"
+    "How many characters would you like your password to be?"
   );
   if (charCount < 8 || charCount > 128) {
     alert(
@@ -121,14 +124,14 @@ function questions() {
   }
   console.log(charCount);
   //Confirm is true false
-  let uppercase = confirm("Do you want uppercase charachters?");
+  let uppercase = confirm("Do you want uppercase characters?");
   console.log(uppercase);
   if (uppercase == true) {
     options = options.concat(uppercaseArr);
   }
   console.log(options);
 
-  let lowercase = confirm("Do you want lowercase charachters?");
+  let lowercase = confirm("Do you want lowercase characters?");
   console.log(lowercase);
   if (lowercase == true) {
     options = options.concat(lowercaseArr);
@@ -136,7 +139,7 @@ function questions() {
   console.log(options);
 
   let specChar = confirm(
-    "Would you like to use special charachters in your password?"
+    "Would you like to use special characters in your password?"
   );
   console.log(specChar);
   if (specChar == true) {
@@ -145,7 +148,40 @@ function questions() {
   console.log(options);
 }
 
+function generateRandomPassword() {
+  if (questions.uppercase == true) password.push(uppercaseArr);
+
+  console.log(password);
+
+  if (questions.lowercase == true) password.push(lowercaseArr);
+
+  console.log(password);
+
+  if (questions.specChar == true) password.push(specCharArr);
+
+  console.log(password);
+
+  return "";
+}
+var selections = generateRandomPassword(10, true, true, true);
+
+// password = "";
+function random() {
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * allChars.length);
+    selections += allChars[randomIndex];
+  }
+
+  return selections;
+}
+//  taking lengh of user inputs and looping over the password array while grabbing a character from each option and put into selected length
+function loopOver() {}
+// Usage example
+
+console.log(password);
+
 //math.random w3
+
 //Creating charachters for password to use
 function passBuild() {}
 
