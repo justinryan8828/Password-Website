@@ -1,25 +1,6 @@
-//hit button prompt how many charachters
-
-//if less 8 or more 128 alert
-
-//if between 8 and 128 confirm lowercase
-//confirm uppercase
-//confirm numeric
-//confirm special charchter
-//if yess add to array
-
-//const special =
-
-//prompts for password length, cap,lower,special,numbers
-
-//if yes add to array
-
-// Assignment Code
-//if ((passobj.count, 8 || passobj.count > 128)) {
-//alert("That number is not betweeen 8 and 128. Please enter a correct number.");
-//Given Code
 var generateBtn = document.querySelector("#generate");
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+const numbersArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const uppercaseArr = [
   "A",
   "B",
@@ -106,84 +87,71 @@ const specCharArr = [
 ];
 
 let passobj = [""];
-let password = [];
+let password = "";
 
 function questions() {
-  var allChars = lowercaseArr + uppercaseArr + specCharArr;
-
+  var lowercase, uppercase, numbers, specChar;
   let options = [];
 
   let charCount = prompt(
     "How many characters would you like your password to be?"
   );
-  if (charCount < 8 || charCount > 128) {
+  while (charCount < 8 || charCount > 128) {
     alert(
       "That number is not betweeen 8 and 128. Please enter a correct number."
     );
-    questions();
+    charCount = prompt(
+      "How many characters would you like your password to be?"
+    );
   }
-  console.log(charCount);
-  //Confirm is true false
-  let uppercase = confirm("Do you want uppercase characters?");
-  console.log(uppercase);
-  if (uppercase == true) {
-    options = options.concat(uppercaseArr);
-  }
-  console.log(options);
 
-  let lowercase = confirm("Do you want lowercase characters?");
-  console.log(lowercase);
-  if (lowercase == true) {
-    options = options.concat(lowercaseArr);
-  }
-  console.log(options);
+  //
 
-  let specChar = confirm(
-    "Would you like to use special characters in your password?"
-  );
-  console.log(specChar);
-  if (specChar == true) {
-    options = options.concat(specCharArr);
+  function getOptions() {
+    uppercase = confirm("Do you want uppercase characters?");
+
+    if (uppercase == true) {
+      options = options.concat(uppercaseArr);
+    }
+
+    lowercase = confirm("Do you want lowercase characters?");
+
+    if (lowercase == true) {
+      options = options.concat(lowercaseArr);
+    }
+
+    numbers = confirm(
+      "Would you like to use some funky numbers in your password?"
+    );
+
+    if (numbers == true) {
+      options = options.concat(numbersArr);
+    }
+
+    specChar = confirm(
+      "Would you like to use special characters in your password?"
+    );
+
+    if (specChar == true) {
+      options = options.concat(specCharArr);
+    }
   }
-  console.log(options);
+
+  getOptions();
+  while (!lowercase && !uppercase && !specChar && !numbers) {
+    alert("Boy, quit playing and pick one!");
+    getOptions();
+  }
+  for (var i = 0; i < charCount; i++) {
+    var randomIndex = Math.floor(Math.random() * options.length);
+    password = password.concat(options[randomIndex]);
+  }
 }
 
-function generateRandomPassword() {
-  if (questions.uppercase == true) password.push(uppercaseArr);
-
-  console.log(password);
-
-  if (questions.lowercase == true) password.push(lowercaseArr);
-
-  console.log(password);
-
-  if (questions.specChar == true) password.push(specCharArr);
-
-  console.log(password);
-
-  return "";
+function writePassword() {
+  questions();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
 }
-var selections = generateRandomPassword(10, true, true, true);
 
-// password = "";
-function random() {
-  for (var i = 0; i < length; i++) {
-    var randomIndex = Math.floor(Math.random() * allChars.length);
-    selections += allChars[randomIndex];
-  }
-
-  return selections;
-}
-//  taking lengh of user inputs and looping over the password array while grabbing a character from each option and put into selected length
-function loopOver() {}
-// Usage example
-
-console.log(password);
-
-//math.random w3
-
-//Creating charachters for password to use
-function passBuild() {}
-
-//Adding the event listener to button on html
-generateBtn.addEventListener("click", questions);
+generateBtn.addEventListener("click", writePassword);
