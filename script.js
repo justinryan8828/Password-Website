@@ -1,5 +1,7 @@
 var generateBtn = document.querySelector("#generate");
 
+// Creating my global arrays
+
 const numbersArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const uppercaseArr = [
   "A",
@@ -89,6 +91,8 @@ const specCharArr = [
 let passobj = [""];
 let password = "";
 
+// Generate function for prompt on character
+
 function questions() {
   var lowercase, uppercase, numbers, specChar;
   let options = [];
@@ -105,7 +109,7 @@ function questions() {
     );
   }
 
-  //
+  //Generate function to ask questions about figures
 
   function getOptions() {
     uppercase = confirm("Do you want uppercase characters?");
@@ -137,6 +141,8 @@ function questions() {
     }
   }
 
+  // Create alert for if someone doesnt select any figures
+
   getOptions();
   while (!lowercase && !uppercase && !specChar && !numbers) {
     alert("Boy, quit playing and pick one!");
@@ -147,6 +153,8 @@ function questions() {
     password = password.concat(options[randomIndex]);
   }
 }
+
+// Generate function to write password
 
 function writePassword() {
   questions();
